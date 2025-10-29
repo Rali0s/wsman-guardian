@@ -139,12 +139,4 @@ Include your preferred license (e.g., MIT) in `LICENSE`. This repo includes code
 ## Important references & further reading
 
 * WS-Man / WinRM protocol and SOAP payloads — use official MS docs when crafting detection rules.
-* Defensive writeups on unauthenticated WMI/WinRM misuse and the “chirp” pattern in the DMZ. See the project’s design notes and threat analysis included in `deep-nim-sec.py` for deeper context. 
-
----
-
-If you want, I can:
-
-* Produce a `CONTRIBUTING.md` and a `systemd` unit file to run the passive logger as a service.
-* Add a `make` target or Dockerfile for a reproducible analysis container.
-  Tell me which one to add next.
+* Defensive writeups on unauthenticated WMI/WinRM misuse and the “chirp” pattern in the DMZ. See the project’s design notes and threat analysis included in `deep-nim-sec.py` for deeper context.
