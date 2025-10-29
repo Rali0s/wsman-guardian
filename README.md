@@ -9,17 +9,37 @@
   <b>wsman-guardian</b> — Passive WS-Man / CIM Inspector • CVE-2025-59287 Aware • MITRE ATT&CK Aligned
 </p>
 
+---
+<p align="center">
+  <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT">
+  <img src="https://img.shields.io/badge/status-defender--first-success" alt="Status: Defensive">
+  <img src="https://img.shields.io/badge/coverage-CVE--2025--59287-critical" alt="CVE-2025-59287 Coverage">
+</p>
+
+<p align="center">
+  <b>wsman-guardian</b> — Passive WS-Man / CIM Inspector • CVE-2025-59287 Aware • MITRE ATT&CK Aligned
+</p>
+
+---
+
 **Short description**
 A defensive toolkit for inspecting WS-Man / CIM traffic (WS-Man SOAP over HTTP/HTTPS) on Linux gateways and correlating findings with Windows hosts. The tools are passive by default: they log and redact SOAP payloads for forensic analysis and host correlation — they do **not** modify or replay traffic unless explicitly enabled in isolated lab mode.
 
 ---
 
+## Red Teaming & ML Cross-Correlation Report
+
+A public-safe summary of our red-team-style workflow and ML research is available at `docs/REDTEAM_REPORT.md`.  
+Sensitive artifacts (raw pcaps, model checkpoints containing private training data, and step-by-step offensive procedures) are withheld and available only to vetted partners under NDA.  
+For security coordination, see `README.md` or contact `3XCypher@pm.me`.
+
+
 ## Project components (what’s in this repo)
 
 * `passive_wsman_nfqueue.py` — Passive NFQUEUE-based WS-Man/SOAP logger (primary runtime). Binds to an NFQUEUE, inspects TCP payloads for WS-Man SOAP envelopes, redacts sensitive tags, writes JSONL records and human-readable logs. See code and behavior. 
 * `wsman_nfqueue.py` — Earlier variant that includes optional forwarding/replay helpers (replay is disabled by default). Use only for lab experiments after reading warnings. 
-* `wsman_pcap-extract-offline.py` — Offline pyshark extractor for pcaps: finds HTTP flows on ports like 5985/8530 and extracts SOAP bodies into JSONL for analysis. Useful for post-capture forensic work. 
-* `ps_listener.py` (PowerShell) — Local TCP listener to receive JSON lines from a network-side extractor and correlate them with host-side evidence (`Get-CimSession`, WinRM/WinEvent logs). Designed to run on the Windows host for triage. 
+* `wsman_pcap-extract.py` — Offline pyshark extractor for pcaps: finds HTTP flows on ports like 5985/8530 and extracts SOAP bodies into JSONL for analysis. Useful for post-capture forensic work. 
+* `ps_listener.ps1` (PowerShell) — Local TCP listener to receive JSON lines from a network-side extractor and correlate them with host-side evidence (`Get-CimSession`, WinRM/WinEvent logs). Designed to run on the Windows host for triage. 
 * `stateful_defender.py` — Prototype logic for stateful "chirp" detection (burst detection / simulated benign-error injection). Example only; shows how stateful counters and thresholds could be used to trigger actions. 
 * `ip-tables.sh` — Example iptables rules to route selected traffic to NFQUEUE for authorized lab/gateway inspection. **Do not run on networks without authorization.** 
 
@@ -36,9 +56,10 @@ A defensive toolkit for inspecting WS-Man / CIM traffic (WS-Man SOAP over HTTP/H
 
 ## Requirements
 
-* Linux gateway (for NFQUEUE mode): `python3` (3.8+), root to bind NFQUEUE and run iptables.
+* Linux gateway (for NFQUEUE mode): `python3` (3.8+|3.12+), root to bind NFQUEUE and run iptables.
 * Dependencies (install via pip): `netfilterqueue`, `scapy`, `lxml`, `pyshark` (for offline mode). See each script for exact requirements. 
-* Windows host (optional) for `ps_listener.py`: PowerShell (run elevated) and access to relevant event logs for correlation. 
+* Dependencies-OSX (install via pip): `scapy`, `lxml`, `pyshark` (for live mode). See each script for exact requirements - wireshark options ( `brew install wireshark` )
+* Windows host (optional) for `ps_listener.p1`: PowerShell (run elevated) and access to relevant event logs for correlation. 
 
 ---
 
@@ -67,7 +88,7 @@ A defensive toolkit for inspecting WS-Man / CIM traffic (WS-Man SOAP over HTTP/H
 
    Example rule included. 
 
-3. **On the Windows host (optional):** run `ps_listener.py` (PowerShell) to accept JSON lines from a collector (if you use the forwarding-enabled variant) and correlate with host logs:
+3. **On the Windows host (optional):** run `ps_listener.p1` (PowerShell) to accept JSON lines from a collector (if you use the forwarding-enabled variant) and correlate with host logs:
 
    ```powershell
    # run elevated
@@ -134,8 +155,10 @@ The script decodes HTTP flows for ports typically used by WinRM/WSUS and extract
 ---
 
 ## Licensing & attribution
+### Legal Notice
 
-Include your preferred license (e.g., MIT) in `LICENSE`. This repo includes code templates and examples intended for defensive use and research.
+See [NOTICE](NOTICE) and [LICENSE](LICENSE) for terms, attributions, and security disclosures.
+
 
 ---
 
@@ -149,3 +172,24 @@ Include your preferred license (e.g., MIT) in `LICENSE`. This repo includes code
 
 * WS-Man / WinRM protocol and SOAP payloads — use official MS docs when crafting detection rules.
 * Defensive writeups on unauthenticated WMI/WinRM misuse and the “chirp” pattern in the DMZ. See the project’s design notes and threat analysis included in `deep-nim-sec.py` for deeper context.
+<<<<<<< HEAD
+=======
+
+---
+
+## ⚖️ License & Legal Notice
+
+This project is licensed under the **[MIT License](LICENSE)** © 2025 *wsman-guardian contributors.*
+
+Use of this software is permitted for **authorized defensive, research, and educational purposes only.**
+It must **not** be used for exploitation, unauthorized interception, or offensive security testing without
+explicit written consent from the system owner.
+
+See [NOTICE](NOTICE) for attribution, MITRE ATT&CK mappings, and defensive disclosure details regarding **CVE-2025-59287**.
+
+---
+
+<p align="center">
+  <sub>Maintained with 🛡️ by the Rali0s/CypherArc team — Stealth by design, defense by intent.</sub>
+</p>
+>>>>>>> d25cfff (Syncing Repo Data, Docs, MDs, Code)

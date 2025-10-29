@@ -1,0 +1,81 @@
+NOTICE
+=======
+
+Project: wsman-guardian  
+Version: 2025.10  
+License: MIT  
+Repository: https://github.com/Rali0s/wsman-guardian  
+
+---
+
+© 2025 wsman-guardian contributors. All rights reserved.  
+This project is released under the MIT License (see LICENSE for full text).
+
+---
+
+PURPOSE
+--------
+wsman-guardian is a **defensive, passive inspection toolkit** for analyzing WS-Man / CIM (SOAP over HTTP/HTTPS)
+traffic in secure environments. It enables defenders to observe, redact, and correlate management-plane network
+activity without modifying or replaying packets. The tooling focuses on defensive visibility, compliance validation,
+and forensic triage.
+
+The codebase is **non-invasive** by design: no active exploitation, no injection, and no modification of live
+traffic occurs unless explicitly enabled in a lab-only, opt-in configuration.
+
+---
+
+SECURITY DISCLOSURE
+--------------------
+This repository includes references and defensive mitigations related to the
+critical vulnerability **CVE-2025-59287** (Microsoft Windows Server Update Services — WSUS RCE, CVSS 9.8).
+
+- Purpose of reference: to help defenders verify host and network configurations, apply vendor patches,
+  and block exposure on TCP 8530/8531 until remediation is confirmed.
+- All mentions of CVE-2025-59287 exist for **awareness and defensive hardening only.**
+- No exploit or proof-of-concept code is included or permitted in this repository.
+
+If you discover a new vulnerability or potential security issue in this project,
+please report it responsibly following the procedure described in `CONTRIBUTING.md`
+under **Security & Responsible Disclosure**.
+
+---
+
+MITRE ATT&CK MAPPING
+---------------------
+The project aligns defensive detection and mitigation coverage to MITRE ATT&CK tactics and techniques, including:
+
+- **T1190** – Exploit Public-Facing Application (WSUS RCE / CVE-2025-59287)
+- **T1047** – Windows Management Instrumentation (WMI)
+- **T1021** – Remote Services: WinRM / WS-Man
+- **T1071.001** – Application Layer Protocol: Web Protocols
+- **T1059.001** – Command and Scripting Interpreter: PowerShell
+
+Full mapping and references are maintained in `MITRE_MAPPING.md`.
+
+---
+
+ATTRIBUTION
+------------
+This project uses:
+- `scapy`, `pyshark`, and `lxml` under their respective open-source licenses.
+- `libpcap` (via system installation) for passive packet capture on macOS and Linux.
+- No proprietary or closed-source dependencies.
+
+---
+
+DISCLAIMER
+-----------
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE,
+ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+---
+
+CONTACT
+--------
+Maintainer(s): CypherArc 
+Security Contact: 3XCypher@pm.me (for coordinated disclosure)  
+Project Home: https://github.com/Rali0s/wsman-guardian
