@@ -1,4 +1,13 @@
 # WS-Man Passive Inspector & Defender — README.md
+<p align="center">
+  <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT">
+  <img src="https://img.shields.io/badge/status-defender--first-success" alt="Status: Defensive">
+  <img src="https://img.shields.io/badge/coverage-CVE--2025--59287-critical-red" alt="CVE-2025-59287 Coverage">
+</p>
+
+<p align="center">
+  <b>wsman-guardian</b> — Passive WS-Man / CIM Inspector • CVE-2025-59287 Aware • MITRE ATT&CK Aligned
+</p>
 
 **Short description**
 A defensive toolkit for inspecting WS-Man / CIM traffic (WS-Man SOAP over HTTP/HTTPS) on Linux gateways and correlating findings with Windows hosts. The tools are passive by default: they log and redact SOAP payloads for forensic analysis and host correlation — they do **not** modify or replay traffic unless explicitly enabled in isolated lab mode.
